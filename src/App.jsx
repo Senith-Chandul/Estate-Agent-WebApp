@@ -1,14 +1,20 @@
-import { useState } from 'react'
-import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SearchPage from './pages/SearchPage';
+import PropertyPage from './pages/PropertyPage';
+import Navbar from './components/navbar';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-
-    </>
-  )
+    <BrowserRouter>
+      <Navbar />
+      <div className="app-container">
+        <Routes>
+          <Route path="/" element={<SearchPage />} />
+          <Route path="/property/:id" element={<PropertyPage />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;

@@ -14,7 +14,6 @@ function SearchForm({ onSearch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Bundle all criteria into one object
     const criteria = {
       type,
       minPrice: Number(minPrice) || 0,
@@ -24,8 +23,30 @@ function SearchForm({ onSearch }) {
       postcode,
       dateAdded
     };
-    // Send this data back to the parent component (SearchPage)
     onSearch(criteria);
+  };
+
+  // --- NEW CLEAR FUNCTION ---
+  const handleClear = () => {
+    // 1. Reset all local state variables
+    setType('any');
+    setMinPrice('');
+    setMaxPrice('');
+    setMinBedrooms('');
+    setMaxBedrooms('');
+    setPostcode('');
+    setDateAdded(null);
+
+    // 2. Immediately trigger a search with default "empty" values
+    onSearch({
+      type: 'any',
+      minPrice: 0,
+      maxPrice: Infinity,
+      minBedrooms: 0,
+      maxBedrooms: 10,
+      postcode: '',
+      dateAdded: null
+    });
   };
 
   return (
@@ -80,7 +101,7 @@ function SearchForm({ onSearch }) {
         </div>
       </div>
 
-      {/* Date Added Widget (React Widget requirement) */}
+      {/* Date Added Widget */}
       <div style={styles.group}>
         <label>Added After:</label>
         <DatePicker 
@@ -91,18 +112,46 @@ function SearchForm({ onSearch }) {
         />
       </div>
 
-      <button type="submit" style={styles.button}>Search Properties</button>
+      {/* --- BUTTONS SECTION --- */}
+      <div style={styles.buttonGroup}>
+        <button type="submit" style={styles.searchButton}>Search Properties</button>
+        <button type="button" onClick={handleClear} style={styles.clearButton}>Clear Filter</button>
+      </div>
     </form>
   );
 }
 
-// Basic styling to make it look decent immediately
+// Updated styles to accommodate the new button layout
 const styles = {
   form: { backgroundColor: '#f4f4f4', padding: '20px', borderRadius: '8px', marginBottom: '20px' },
   row: { display: 'flex', gap: '20px', marginBottom: '10px', flexWrap: 'wrap' },
   group: { display: 'flex', flexDirection: 'column', flex: 1 },
   input: { padding: '8px', borderRadius: '4px', border: '1px solid #ddd' },
-  button: { color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px' }
+  
+  // New/Updated Styles for Buttons
+  buttonGroup: { display: 'flex', gap: '10px', marginTop: '20px' },
+  searchButton: { 
+    flex: 2, 
+    backgroundColor: '#4f46e5', // Indigo
+    color: 'white', 
+    padding: '10px 20px', 
+    border: 'none', 
+    borderRadius: '5px', 
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '16px',
+  },
+  clearButton: { 
+    flex: 1, 
+    backgroundColor: '#9ca3af', // Grey
+    color: 'white', 
+    padding: '10px 20px', 
+    border: 'none', 
+    borderRadius: '5px', 
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    fontSize: '16px',
+  }
 };
 
 export default SearchForm;

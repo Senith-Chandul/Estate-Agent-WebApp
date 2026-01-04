@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import SearchForm from '../components/SearchForm';
-import PropertyCard from '../components/PropertyCard'; // Import new draggable card
-import FavoritesList from '../components/FavoritesList'; // Import drop zone
+import PropertyCard from '../components/PropertyCard';
+import FavoritesList from '../components/FavoritesList';
 import propertiesData from '../data/properties.json';
 
 function SearchPage() {
@@ -36,7 +36,7 @@ function SearchPage() {
         
         {/* Left Column: Property Results */}
         <div style={{ flex: 3 }}>
-          <h2>Results ({properties.length})</h2>
+          <h2 style={titleStyle}>Results ({properties.length})</h2>
           <div style={gridStyle}>
             {properties.map(property => (
               <PropertyCard key={property.id} property={property} />
@@ -54,7 +54,8 @@ function SearchPage() {
   );
 }
 
-const layoutStyle = { display: 'flex', gap: '20px', alignItems: 'flex-start', flexWrap: 'wrap' };
+const layoutStyle = { display: 'flex', gap: '20px', alignItems: 'flex-start', flexWrap: 'wrap', marginTop: '2rem' };
 const gridStyle = { display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '20px' };
+const titleStyle = { marginBottom: '15px', color: '#333' };
 
 export default SearchPage;

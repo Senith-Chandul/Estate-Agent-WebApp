@@ -44,7 +44,7 @@ function FavoritesList() {
                 onClick={() => removeFavorite(fav.id)} 
                 style={styles.removeBtn}
               >
-                X
+                ✕
               </button>
             </li>
           ))}

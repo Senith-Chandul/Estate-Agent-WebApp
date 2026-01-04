@@ -1,0 +1,360 @@
+:root {
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --danger-color: #ef4444;
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --radius: 12px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.app-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-top: -2rem;
+    padding: 2rem;
+    min-height: 80vh;
+}
+
+.page-transition {
+    animation: pageSlideUp 0.4s ease-out forwards;
+}
+
+.navbar {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    margin-bottom: 0;
+    animation: slideDown 0.3s ease-out;
+}
+
+.navbar-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-logo {
+    color: white;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.5px;
+    transition: opacity 0.2s ease;
+}
+
+.navbar-logo:hover {
+    opacity: 0.9;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 20px;
+    transition: color 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    color: white;
+}
+
+.search-form {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin-top: 1rem;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.search-form label {
+    font-weight: 600;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+.search-form h3 {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.search-form button[type="submit"] {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    width: 100%;
+    margin-top: 1rem;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.search-form button[type="submit"]:hover {
+    background-color: var(--primary-hover);
+}
+
+.search-form button[type="submit"]:active {
+    transform: scale(0.98);
+}
+
+.search-page-layout {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+    margin-top: 2rem;
+}
+
+.results-column {
+    flex: 3;
+}
+
+.favorites-sidebar {
+    flex: 1;
+    min-width: 320px;
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 20px;
+    height: fit-content;
+    animation: slideInRight 0.4s ease-out;
+}
+
+.property-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.property-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    animation: cardFadeIn 0.3s ease-out;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.property-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.card-content {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-content a {
+    margin-top: auto;
+    display: block;
+}
+
+button,
+.btn {
+    cursor: pointer;
+    border: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-radius: 6px;
+}
+
+button:hover,
+.btn:hover {
+    filter: brightness(1.05);
+}
+
+button:active,
+.btn:active {
+    transform: scale(0.98);
+}
+
+input,
+select {
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 0.6rem;
+    font-size: 0.95rem;
+    width: 100%;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+input:hover:not(:focus),
+select:hover:not(:focus) {
+    border-color: #d1d5db;
+}
+
+.react-tabs__tab-list {
+    display: flex;
+    gap: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+    margin: 0 0 1.5rem 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.react-tabs__tab {
+    padding: 0.8rem 0;
+    cursor: pointer;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-size: 1rem;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    outline: none;
+}
+
+.react-tabs__tab:hover {
+    color: var(--primary-color);
+}
+
+.react-tabs__tab--selected {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+    font-weight: 600;
+    background: transparent;
+}
+
+.react-tabs__tab-panel {
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes cardFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pageSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(5px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
+
+@media (max-width: 1024px) {
+    .app-container {
+        padding: 1rem;
+    }
+
+    .search-page-layout {
+        flex-direction: column-reverse;
+        gap: 1.5rem;
+    }
+
+    .favorites-sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 1rem;
+    }
+
+    .property-grid {
+        grid-template-columns: 1fr;
+    }
+}

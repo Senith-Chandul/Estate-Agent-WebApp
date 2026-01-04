@@ -12,24 +12,43 @@ function PropertyCard({ property }) {
   }));
 
   return (
-    <div 
-      ref={drag} // Connect the DOM element to the drag source
-      style={{ 
-        ...styles.card, 
-        opacity: isDragging ? 0.5 : 1, 
-        cursor: 'move' 
-      }}
+    <div
+      ref={drag}
+      className="property-card" // Added class for new CSS
+      style={{ opacity: isDragging ? 0.5 : 1, cursor: 'move' }}
     >
-      <img 
-        src={`/${property.picture}`} 
-        alt={property.type} 
-        style={{ width: '100%', height: '200px', objectFit: 'cover' }} 
-      />
-      <div style={{ padding: '15px' }}>
+      <div style={{ position: 'relative', height: '220px' }}>
+        <img
+          src={`/${property.picture}`}
+          alt={property.type}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+        />
+        <span style={{
+          position: 'absolute', top: '10px', right: '10px',
+          background: 'rgba(255,255,255,0.9)', padding: '4px 8px',
+          borderRadius: '4px', fontSize: '0.8rem', fontWeight: 'bold'
+        }}>
+          {property.type}
+        </span>
+      </div>
+
+      <div className="card-content">
         <h3>{property.location}</h3>
-        <p><strong>£{property.price.toLocaleString()}</strong></p>
-        <p>{property.type} - {property.bedrooms} Beds</p>
-        <Link to={`/property/${property.id}`} style={styles.link}>
+        <p style={{ color: '#4f46e5', fontWeight: 'bold', fontSize: '1.1rem', marginBottom: '8px' }}>
+          £{property.price.toLocaleString()}
+        </p>
+        <p style={{ color: '#6b7280', fontSize: '0.9rem', marginBottom: '15px' }}>
+          {property.bedrooms} Bedrooms • {property.tenure || 'Freehold'}
+        </p>
+
+        <Link
+          to={`/property/${property.id}`}
+          style={{
+            display: 'block', textAlign: 'center', backgroundColor: '#4f46e5',
+            color: 'white', padding: '10px', textDecoration: 'none',
+            borderRadius: '6px', fontWeight: '500'
+          }}
+        >
           View Details
         </Link>
       </div>

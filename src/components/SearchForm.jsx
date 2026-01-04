@@ -102,7 +102,7 @@ const styles = {
   row: { display: 'flex', gap: '20px', marginBottom: '10px', flexWrap: 'wrap' },
   group: { display: 'flex', flexDirection: 'column', flex: 1 },
   input: { padding: '8px', borderRadius: '4px', border: '1px solid #ddd' },
-  button: { backgroundColor: '#27ae60', color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '10px' }
+  button: { color: 'white', padding: '10px 20px', border: 'none', borderRadius: '5px', cursor: 'pointer', marginTop: '20px' }
 };
 
 export default SearchForm;

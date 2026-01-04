@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css'; // Default CSS for tabs
-import { FaHeart } from 'react-icons/fa'; // Icon for favorites
+import 'react-tabs/style/react-tabs.css';
+import { FaHeart } from 'react-icons/fa'; 
 import propertiesData from '../data/properties.json';
+import { useFavorites } from '../context/FavoritesContext';
 
 function PropertyPage() {
+  const { addFavorite, removeFavorite, isFavorite } = useFavorites();
+
   const { id } = useParams();
   const property = propertiesData.properties.find(p => p.id === id);
 
-  // State to handle the "Main Image" in the gallery
-  // Default to the first picture if available
   const [mainImage, setMainImage] = useState(property ? property.picture : '');
 
   if (!property) return <h2>Property not found</h2>;
@@ -25,13 +26,25 @@ function PropertyPage() {
           <h3>£{property.price.toLocaleString()} - {property.type}</h3>
         </div>
         
-        {/* We will wire this button up in Part 4 */}
-        <button style={styles.favButton}>
-          <FaHeart /> Add to Favourites
-        </button>
+
+      {/* Dynamic Button: Changes based on if it's already a favorite */}
+      {isFavorite(property.id) ? (
+          <button 
+            onClick={() => removeFavorite(property.id)} 
+            style={{...styles.favButton, backgroundColor: '#c0392b'}}
+          >
+            <FaHeart /> Remove from Favourites
+          </button>
+      ) : (
+          <button 
+            onClick={() => addFavorite(property)} 
+            style={styles.favButton}
+          >
+            <FaHeart /> Add to Favourites
+          </button>
+      )}
       </div>
 
-      {/* 2. Image Gallery (5% Marks) */}
       <div style={styles.gallerySection}>
         {/* Large Main Image */}
         <div style={styles.mainImageContainer}>
@@ -40,14 +53,12 @@ function PropertyPage() {
 
         {/* Thumbnail Grid */}
         <div style={styles.thumbnailGrid}>
-          {/* Show the main picture as a thumbnail */}
           <img 
             src={`/${property.picture}`} 
             onClick={() => setMainImage(property.picture)}
             style={mainImage === property.picture ? styles.activeThumb : styles.thumb}
             alt="Main"
           />
-          {/* Show the rest of the gallery images */}
           {property.gallery && property.gallery.map((img, index) => (
             <img 
               key={index}
@@ -60,7 +71,7 @@ function PropertyPage() {
         </div>
       </div>
 
-      {/* 3. React Tabs (7% Marks) */}
+      {/* 3. React Tabs */}
       <div style={styles.tabsSection}>
         <Tabs>
           <TabList>
@@ -89,8 +100,6 @@ function PropertyPage() {
           {/* Tab 3: Google Map */}
           <TabPanel>
             <div style={styles.panelContent}>
-              {/* Using an iframe for the map. In a real app, you'd use the Google Maps API. 
-                  For now, we display a placeholder or the link from JSON if it's embeddable. */}
               <iframe 
                 width="100%" 
                 height="400" 
